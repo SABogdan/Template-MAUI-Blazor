@@ -1,0 +1,21 @@
+﻿@inject IDataService DataService
+@page "/"
+
+<h3>Index</h3>
+@foreach (var item in Data)
+{
+    <p>@item</p>
+}
+
+@code {
+    private List<string> Data { get; set; } = new List<string>();
+
+    override protected async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var result = await DataService.GetData();
+
+        Data = result;
+    }
+}
